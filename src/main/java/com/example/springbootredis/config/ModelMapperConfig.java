@@ -19,7 +19,7 @@ public class ModelMapperConfig {
         ModelMapper mapper=new ModelMapper();
         mapper.getConfiguration()
                 .setSkipNullEnabled(false)
-                .setAmbiguityIgnored(false)
+                .setAmbiguityIgnored(true)
                 .setMatchingStrategy(MatchingStrategies.STANDARD);
         mapper.createTypeMap(Movie.class, MovieResponseDto.class)
                 .addMapping(Movie::getName,MovieResponseDto::setName)
@@ -31,7 +31,9 @@ public class ModelMapperConfig {
                 .addMapping(MovieCreateRequestDto::getDirector,Movie::setDirector);
         mapper.createTypeMap(MovieUpdateRequestDto.class,Movie.class)
                 .addMapping(MovieUpdateRequestDto::getDirector,Movie::setDirector)
-                .addMapping(MovieUpdateRequestDto::getName,Movie::setName);
+                .addMapping(MovieUpdateRequestDto::getName,Movie::setName)
+                        .addMappings(mp -> mp.skip(Movie::setId));
+       // mapper.typeMap(MovieUpdateRequestDto.class,Movie.class).addMappings(mp -> mp.skip(Movie::setId));
         return mapper;
     }
 }
