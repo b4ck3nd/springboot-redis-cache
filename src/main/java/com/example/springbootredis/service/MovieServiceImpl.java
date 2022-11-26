@@ -69,7 +69,6 @@ public class MovieServiceImpl implements MovieService{
 
      @CacheEvict(cacheNames = "movies",key = "#id")
     //@CacheEvict(cacheNames = "movies",allEntries = true )
-    //@CacheEvict(cacheNames = "movies",allEntries = true )
     @Override
     public void deleteById(long id) {
         movieRepository.deleteById(id);

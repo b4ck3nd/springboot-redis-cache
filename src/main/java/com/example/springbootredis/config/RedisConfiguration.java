@@ -1,6 +1,7 @@
 package com.example.springbootredis.config;
 
 
+import com.example.springbootredis.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
@@ -19,6 +20,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import java.time.Duration;
@@ -65,5 +67,21 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
+
+    /*
+    @Bean(name = "movies")
+    public RedisTemplate<String, Movie> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String,Movie> redisTemplate=new RedisTemplate<>();
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.setConnectionFactory(factory);
+        return redisTemplate;
+
+    }
+    
+     */
 
 }

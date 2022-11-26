@@ -10,6 +10,4 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Long> {
-    @Query("SELECT m.id FROM Movie m")
-    List<Long> getIds();
 }
